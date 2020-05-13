@@ -1,0 +1,20 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "ES5",
+        "forceConsistentCasingInFileNames": false,
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "keyofStringsOnly": true,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "removeComments": true,
+        "skipLibCheck": true,
+        "types": ["jest", "node"],
+        "lib": ["dom", "es2015"],
+        "esModuleInterop": true,
+        "typeRoots": ["./node_modules/@types", "./src/"]
+    },
+    "exclude": ["node_modules", "dist", "test", "**/*.test.ts", "**/*.test.tsx"]
+}
