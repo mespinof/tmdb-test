@@ -11,7 +11,7 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) =>
     webpackMerge(
         {
             mode,
-            entry: './src/app.jsx',
+            entry: './src/app.tsx',
             output: {
                 path: path.join(__dirname, 'dist'),
                 filename: 'bundle.[hash:8].js',
@@ -21,13 +21,13 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) =>
                 rules: [
                     {
                         loader: 'babel-loader',
-                        test: /\.jsx?$/,
+                        test: /\.tsx?$/,
                         exclude: /node_modules/,
                     },
                 ],
             },
             resolve: {
-                extensions: ['.js', '.json', '.jsx'],
+                extensions: ['.js', '.json', '.ts', '.tsx'],
             },
             plugins: [
                 new HtmlWebpackPlugin({
