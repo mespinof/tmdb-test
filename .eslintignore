@@ -1,0 +1,19 @@
+# CSS & SASS files
+**/*.css
+**/*.scss
+
+# Images
+**/*.png
+**/*.gif
+**/*.svg
+
+# Fonts
+**/*.woff
+**/*.woff2
+
+# Webpack
+**/*Webpack.*
+
+# Static html
+**/*.html
+
