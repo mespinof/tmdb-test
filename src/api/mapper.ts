@@ -20,16 +20,17 @@ export function getImage(query: string): string {
 
 export function mapMovieData(data: any[]): MovieData[] {
     const movieData: MovieData[] = [];
-    data.map(dataItem => {
-        const movie: MovieData = {
-            id: dataItem.id,
-            title: dataItem.title,
-            date: dataItem.release_date,
-            overview: dataItem.overview,
-            popularity: dataItem.popularity,
-            poster: dataItem.poster_path ? getImage(dataItem.poster_path) : null,
-        };
-        movieData.push(movie);
-    });
+    data &&
+        data.map(dataItem => {
+            const movie: MovieData = {
+                id: dataItem.id,
+                title: dataItem.title,
+                date: dataItem.release_date,
+                overview: dataItem.overview,
+                popularity: dataItem.popularity,
+                poster: dataItem.poster_path ? getImage(dataItem.poster_path) : null,
+            };
+            movieData.push(movie);
+        });
     return movieData;
 }

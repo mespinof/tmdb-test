@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 
 import { Header } from '../components/Header/Header';
 import classes from './Main.scss';
@@ -26,12 +26,14 @@ export function Main() {
 
     const onSearch = useCallback(async (query: string | null): Promise<void> => {
         setLoading(true);
+        let dataResponse = null;
         try {
-            const dataResponse = await getMovies(query);
-            setMovieData(mapMovieData(!!dataResponse ? dataResponse : null));
+            dataResponse = !!query && (await getMovies(query));
         } catch (e) {
+            dataResponse = null;
             return;
         }
+        setMovieData(mapMovieData(!!dataResponse ? dataResponse : null));
         setLoading(false);
     }, []);
 
@@ -40,6 +42,10 @@ export function Main() {
         handleOpen();
     }, []);
 
+    useEffect((): void => {
+        movieData && console.log(movieData);
+    }, [movieData]);
+
     return (
         <div style={{ height: 'auto' }}>
             <div className={classes.container}>
@@ -47,7 +53,7 @@ export function Main() {
                     <Header onSearch={onSearch} />
                 </div>
                 <div className={classes.content}>
-                    {movieData ? (
+                    {!!movieData ? (
                         movieData.map((movie, index) => {
                             return <Card key={movie + index} movieData={movie} onClick={onClickCard} />;
                         })
