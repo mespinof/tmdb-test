@@ -1,0 +1,62 @@
+.movieInfoContainer {
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    background-color: #fff;
+    display: grid;
+    grid-template:
+        'poster title' 2rem
+        'poster year' 1rem
+        'poster description' 8rem
+        'poster popularity' 1rem
+        'poster comment' 3rem
+        'stars comment' 3rem / 12rem 30rem;
+    grid-gap: 1rem;
+}
+
+.poster {
+    grid-area: poster;
+
+    img {
+        border-radius: 5px;
+        width: 12rem;
+        height: 19rem;
+        object-fit: cover;
+    }
+}
+.title {
+    grid-area: title;
+    font-size: 2rem;
+}
+.year {
+    grid-area: year;
+}
+.description {
+    grid-area: description;
+    font-size: 0.9rem;
+}
+.popularity {
+    grid-area: popularity;
+    font-size: 0.9rem;
+}
+.stars {
+    grid-area: stars;
+    justify-self: center;
+}
+.comment {
+    grid-area: comment;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    grid-gap: 1rem;
+    width: 100%;
+}
+
+.commentField {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.enterButton {
+    background-color: #1d1d1d;
+}

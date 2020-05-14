@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Main } from './components/Main/Main';
+import { Main } from './pages/Main';
+import { MovieDataContextProvider } from './provider/MovieDataContextProvider';
 
-ReactDOM.render(<Main />, document.getElementById('app'));
+ReactDOM.render(
+    <MovieDataContextProvider>
+        <Main />
+    </MovieDataContextProvider>,
+    document.getElementById('app'),
+);

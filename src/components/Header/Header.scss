@@ -1,0 +1,23 @@
+.headerContainer {
+    display: flex;
+    height: 100%;
+    padding: 0 1rem;
+    align-items: flex-start;
+    flex-direction: column;
+
+    p {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 1rem 0;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.searchInput {
+    margin: 1rem;
+}
