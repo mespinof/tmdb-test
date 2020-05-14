@@ -14,17 +14,17 @@ export function Main() {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedMovie, setSelectedMovie] = useState<MovieData>(null);
-    const { movieData, setMovieData, ratedMovieData, setRatedMovieData } = useContext(MovieDataContext);
+    const { movieData, setMovieData } = useContext(MovieDataContext);
 
-    const handleOpen = useCallback(() => {
+    const handleOpen = useCallback((): void => {
         setOpenModal(true);
     }, []);
 
-    const handleClose = useCallback(() => {
+    const handleClose = useCallback((): void => {
         setOpenModal(false);
     }, []);
 
-    const onSearch = useCallback(async (query: string | null) => {
+    const onSearch = useCallback(async (query: string | null): Promise<void> => {
         setLoading(true);
         try {
             const dataResponse = await getMovies(query);
@@ -35,7 +35,7 @@ export function Main() {
         setLoading(false);
     }, []);
 
-    const onClickCard = useCallback((movie: MovieData) => {
+    const onClickCard = useCallback((movie: MovieData): void => {
         setSelectedMovie(movie);
         handleOpen();
     }, []);

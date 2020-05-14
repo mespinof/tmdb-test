@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { MovieData, RatedMovie } from '../api/mapper';
 
-const defaultValues = {
+export const defaultValues = {
     movieData: [],
     setMovieData: null,
     ratedMovieData: [],

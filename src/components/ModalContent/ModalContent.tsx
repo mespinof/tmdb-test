@@ -16,10 +16,6 @@ export const ModalContent = ({ movie }: ModalContentProps): React.ReactElement<M
     const { ratedMovieData, setRatedMovieData } = useContext(MovieDataContext);
     const commentFieldRef = useRef<HTMLInputElement>(null);
 
-    const handleClick = useCallback(() => {
-        // setComment(commentFieldRef.current.value);
-    }, []);
-
     const handleRating = useCallback(
         (event, value: number) => {
             const ratedMovies: RatedMovie[] = ratedMovieData;
@@ -50,7 +46,7 @@ export const ModalContent = ({ movie }: ModalContentProps): React.ReactElement<M
     useEffect(() => {
         setRating(ratedMovieData.find(ratedMovie => ratedMovie.id === movieId)?.rating || 0);
         setComment(ratedMovieData.find(ratedMovie => ratedMovie.id === movieId)?.comment || null);
-    }, [rating]);
+    }, [ratedMovieData]);
 
     return (
         <div className={classes.movieInfoContainer}>

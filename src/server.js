@@ -1,3 +1,4 @@
+/* eslint-disable */
 const createServer = require('http').createServer;
 const express = require('express');
 const path = require('path');

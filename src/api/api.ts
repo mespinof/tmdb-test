@@ -9,7 +9,7 @@ const serviceInstance: AxiosInstance = axios.create({
 export async function getMovies(query: string): Promise<any> {
     try {
         const response = await serviceInstance.get(`${BASE_URL}${query}`);
-        return response.data?.results;
+        return response.data.results;
     } catch (error) {
         const err = (error.response && error.response.data) || error;
         delete err.config;
