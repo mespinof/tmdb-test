@@ -10,7 +10,7 @@ import { MovieDataContext } from '../../provider/MovieDataContextProvider';
 import { RatedMovie } from '../../api/mapper';
 
 export const ModalContent = ({ movie }: ModalContentProps): React.ReactElement<ModalContentProps> => {
-    const [movieId, setMovieId] = useControlledProp<number>(movie.id);
+    const [movieId] = useControlledProp<number>(movie.id);
     const [comment, setComment] = useControlledProp<string>(movie.comment);
     const [rating, setRating] = useState<number>(0);
     const { ratedMovieData, setRatedMovieData } = useContext(MovieDataContext);
@@ -28,7 +28,7 @@ export const ModalContent = ({ movie }: ModalContentProps): React.ReactElement<M
             setRatedMovieData(ratedMovies);
             setRating(value);
         },
-        [ratedMovieData],
+        [movie, movieId, ratedMovieData, setRatedMovieData],
     );
 
     const handleComment = useCallback(() => {
@@ -41,12 +41,12 @@ export const ModalContent = ({ movie }: ModalContentProps): React.ReactElement<M
         }
         setRatedMovieData(ratedMovies);
         setComment(commentFieldRef.current.value);
-    }, [ratedMovieData]);
+    }, [movie, movieId, ratedMovieData, setComment, setRatedMovieData]);
 
     useEffect(() => {
         setRating(ratedMovieData.find(ratedMovie => ratedMovie.id === movieId)?.rating || 0);
         setComment(ratedMovieData.find(ratedMovie => ratedMovie.id === movieId)?.comment || null);
-    }, [ratedMovieData]);
+    }, [movieId, ratedMovieData, setComment]);
 
     return (
         <div className={classes.movieInfoContainer}>

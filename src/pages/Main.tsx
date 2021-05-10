@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 
 import { Header } from '../components/Header/Header';
 import classes from './Main.scss';
@@ -10,7 +10,7 @@ import { mapMovieData, MovieData } from '../api/mapper';
 import { MovieDataContext } from '../provider/MovieDataContextProvider';
 import { CircularProgress } from '@material-ui/core';
 
-export function Main() {
+export function Main(): JSX.Element {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedMovie, setSelectedMovie] = useState<MovieData>(null);
@@ -24,27 +24,29 @@ export function Main() {
         setOpenModal(false);
     }, []);
 
-    const onSearch = useCallback(async (query: string | null): Promise<void> => {
-        setLoading(true);
-        let dataResponse = null;
-        try {
-            dataResponse = !!query && (await getMovies(query));
-        } catch (e) {
-            dataResponse = null;
-            return;
-        }
-        setMovieData(mapMovieData(!!dataResponse ? dataResponse : null));
-        setLoading(false);
-    }, []);
+    const onSearch = useCallback(
+        async (query: string | null): Promise<void> => {
+            setLoading(true);
+            let dataResponse = null;
+            try {
+                dataResponse = !!query && (await getMovies(query));
+            } catch (e) {
+                dataResponse = null;
+                return;
+            }
+            setMovieData(mapMovieData(!!dataResponse ? dataResponse : null));
+            setLoading(false);
+        },
+        [setMovieData],
+    );
 
-    const onClickCard = useCallback((movie: MovieData): void => {
-        setSelectedMovie(movie);
-        handleOpen();
-    }, []);
-
-    useEffect((): void => {
-        movieData && console.log(movieData);
-    }, [movieData]);
+    const onClickCard = useCallback(
+        (movie: MovieData): void => {
+            setSelectedMovie(movie);
+            handleOpen();
+        },
+        [handleOpen],
+    );
 
     return (
         <div style={{ height: 'auto' }}>

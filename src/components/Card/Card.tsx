@@ -6,7 +6,7 @@ import { CardProps } from './CardProps';
 export const Card = ({ movieData, onClick }: CardProps): React.ReactElement<CardProps> => {
     const handleClick = useCallback(() => {
         onClick(movieData);
-    }, [movieData]);
+    }, [movieData, onClick]);
 
     return (
         movieData && (

@@ -18,20 +18,20 @@ function Portal(props): ReactElement {
     return createPortal(props.children, modalRoot);
 }
 
-export const Modal = (props: ModalProps): ReactElement<ModalProps> => {
-    const [isOpen, setIsOpen] = useControlledProp<boolean>(props.open);
-    const [hidden, setHidden] = useState<boolean>(!props.open);
+export const Modal = ({ open, onClose, className, children }: ModalProps): ReactElement<ModalProps> => {
+    const [isOpen, setIsOpen] = useControlledProp<boolean>(open);
+    const [hidden, setHidden] = useState<boolean>(!open);
 
     const hideModal = useCallback((): void => {
         setIsOpen(false);
-        props.onClose(false);
-    }, [props.onClose, isOpen]);
+        onClose(false);
+    }, [setIsOpen, onClose]);
 
     const handleTransition = useCallback((): void => {
         setTimeout(() => {
             setHidden(true);
         }, 300);
-    }, [hidden]);
+    }, []);
 
     useEffect(() => {
         isOpen && hidden && setHidden(false);
@@ -42,11 +42,11 @@ export const Modal = (props: ModalProps): ReactElement<ModalProps> => {
     return (
         <Portal>
             <div
-                className={`${props.className} ${classes.modalContainer} ${isOpen ? classes.open : ''}`}
+                className={`${className} ${classes.modalContainer} ${isOpen ? classes.open : ''}`}
                 onTransitionEnd={(): void => !isOpen && handleTransition()}
                 onClick={hideModal}
             >
-                <div className={classes.modalWrapper} onClick={e => e.stopPropagation()}>
+                <div className={classes.modalWrapper} onClick={(e): void => e.stopPropagation()}>
                     <div className={classes.innerWrapper}>
                         <div className={classes.content}>
                             {isOpen && (
@@ -54,7 +54,7 @@ export const Modal = (props: ModalProps): ReactElement<ModalProps> => {
                                     <Icon>close</Icon>
                                 </div>
                             )}
-                            {!hidden && props.children}
+                            {!hidden && children}
                         </div>
                     </div>
                 </div>
